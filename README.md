@@ -8,17 +8,18 @@ Para executar o projeto você vai precisar:
 - NPM ( Automaticamente instalado com o Node )
 - Angular ( npm install -g @angular/cli )
 
-Após o node, npm e angular digite:
+Após instalados o node, npm e angular digite no terminal:
 
 ````
 npm install
 
 ````
 
-Após baixar as bibliotecas suba a aplicação digitando:
+Após baixar as bibliotecas suba a aplicação digitando no terminal:
 
 ````
 npm start
 
 ````
 
+Agora entre no seu navegador na url <http://localhost:4200/projetos> para ver o projeto.
