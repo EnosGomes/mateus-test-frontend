@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { Projeto } from './projeto';
-import { ProjetoService } from './projeto.service';
+import { Tarefa } from './tarefa';
+import { TarefaService } from './tarefa.service';
 import Swal from 'sweetalert2'
 import { tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-projetos',
-  templateUrl: './projetos.component.html'
+  selector: 'app-tarefas',
+  templateUrl: './tarefas.component.html'
 })
-export class ProjetosComponent implements OnInit {
+export class TarefasComponent implements OnInit {
 
-  projetos: Projeto[];
+ tarefas: Tarefa[];
   paginador: any;
 
   constructor(
-    private projetoService: ProjetoService,
+    private tarefaService: TarefaService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,20 +24,20 @@ export class ProjetosComponent implements OnInit {
       if (!page) {
         page = 0;
       }
-      this.projetoService.getProjetos(page).pipe(
+      this.tarefaService.getTarefas(page).pipe(
         tap(response => {
-          (response.content as Projeto[]).forEach(projeto => {
+          (response.content as Tarefa[]).forEach(tarefa => {
           });
         })
       ).subscribe(response => {
-        this.projetos = response.content as Projeto[];
+        this.tarefas = response.content as Tarefa[];
         this.paginador = response;
       });
     }
     );
   }
 
-  delete(projeto: Projeto): void {
+  delete(tarefa: Tarefa): void {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: 'btn ml-3 btn-success',
@@ -47,8 +47,8 @@ export class ProjetosComponent implements OnInit {
     })
 
     swalWithBootstrapButtons.fire({
-      title: 'Tem certeza',
-      text: `Tem certeza que quer eliminar o projeto ${projeto.titulo} }?`,
+      title: 'Tem certeza?',
+      text: `Tem certeza que quer eliminar essa tarefa ${tarefa.titulo} }?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sim, eliminar!',
@@ -56,12 +56,12 @@ export class ProjetosComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
-        this.projetoService.delete(projeto.id).subscribe(
+        this.tarefaService.delete(tarefa.id).subscribe(
           response => {
-            this.projetos = this.projetos.filter(cli => cli !== projeto)
+            this.tarefas = this.tarefas.filter(cli => cli !== tarefa)
             swalWithBootstrapButtons.fire(
-              'Deletado',
-              `Projeto ${projeto.titulo} eliminado com sucesso`,
+              'Eliminado',
+              `Tarefa ${tarefa.titulo} eliminada sucesso`,
               'success'
             )
           }

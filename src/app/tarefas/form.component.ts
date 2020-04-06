@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Projeto } from './projeto'
-import { ProjetoService } from './projeto.service'
+import { Tarefa } from './tarefa'
+import { TarefaService } from './tarefa.service'
 import { Router, ActivatedRoute } from '@angular/router'
 import Swal from 'sweetalert2'
 
@@ -10,35 +10,35 @@ import Swal from 'sweetalert2'
 })
 export class FormComponent implements OnInit {
 
-  private projeto: Projeto = new Projeto()
-  private titulo: string = "Criar Projeto";
+  private tarefa: Tarefa = new Tarefa()
+  private titulo: string = "Criar Tarefa";
 
   private errores: string[];
 
-  constructor(private projetoService: ProjetoService,
+  constructor(private tarefaService: TarefaService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarProjeto()
+    this.cargarTarefa()
   }
 
-  cargarProjeto(): void {
+  cargarTarefa(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {
-        this.projetoService.getProjeto(id).subscribe((projeto) => this.projeto = projeto)
+        this.tarefaService.getTarefa(id).subscribe((tarefa) => this.tarefa = tarefa)
       }
     })
   }
 
   create(): void {
-    this.projetoService.create(this.projeto)
+    this.tarefaService.create(this.tarefa)
       .subscribe(json => {
-        this.router.navigate(['/projetos']);
+        this.router.navigate(['/tarefas']);
         Swal.fire(
-          'Novo projeto',
-          `${json.mensaje}: Projeto ${json.projeto.titulo}`,
+          'Nova tarefa',
+          `${json.mensaje}: Tarefa ${json.tarefa.titulo}`,
           'success'
         )
       },
@@ -49,12 +49,12 @@ export class FormComponent implements OnInit {
   }
 
   update(): void {
-    this.projetoService.update(this.projeto)
+    this.tarefaService.update(this.tarefa)
       .subscribe(json => {
-        this.router.navigate(['/projetos']);
+        this.router.navigate(['/tarefas']);
         Swal.fire(
-          'Projeto Actualizado',
-          `${json.mensaje}: Projeto ${json.projeto.titulo}`,
+          'Tarefa atualizada',
+          `${json.mensaje}: Tarefa ${json.tarefa.titulo}`,
           'success'
         )
       },

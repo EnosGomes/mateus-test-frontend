@@ -1,4 +1,5 @@
 import { ProjetosComponent } from './projetos/projetos.component';
+import { TarefasComponent } from './tarefas/tarefas.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,7 +12,12 @@ const routes: Routes = [
   {path: 'projetos', component: ProjetosComponent},
   {path: 'projetos/page/:page', component: ProjetosComponent},
   {path: 'projetos/form', component: FormComponent},
-  {path: 'projetos/form/:id', component: FormComponent}
+  {path: 'projetos/form/:id', component: FormComponent},
+  
+  {path: 'tarefas', component: TarefasComponent},
+  {path: 'tarefas/page/:page', component: TarefasComponent},
+  {path: 'tarefas/form', component: FormComponent},
+  {path: 'tarefas/form/:id', component: FormComponent}
 ];
 
 @NgModule({

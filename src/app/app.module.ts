@@ -11,8 +11,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ProjetosComponent } from './projetos/projetos.component';
+import { TarefasComponent } from './tarefas/tarefas.component';
 import { FormComponent } from './projetos/form.component';
 import { ProjetoService } from './projetos/projeto.service';
+import { TarefaService } from './tarefas/tarefa.service';
 
 import localeEs from '@angular/common/locales/es';
 import { PaginatorComponent } from './paginator/paginator.component';
@@ -30,6 +32,7 @@ registerLocaleData(localeEs, 'es');
     FooterComponent,
     DirectivaComponent,
     ProjetosComponent,
+    TarefasComponent,
     FormComponent,
     PaginatorComponent
   ],
@@ -44,6 +47,7 @@ registerLocaleData(localeEs, 'es');
   ],
   providers: [
     ProjetoService,
+    TarefaService,
     {provide: LOCALE_ID, useValue: 'es'}
   ],
   bootstrap: [AppComponent]
