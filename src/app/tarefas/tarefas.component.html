@@ -1,36 +1,34 @@
 <div class="card border-primary mb-3">
-    <div class="card-header">Projetos</div>
+    <div class="card-header">Tarefas</div>
     <div class="card-body text-primary">
-        <h5 class="card-title">Lista de projetos</h5>
+        <h5 class="card-title">Lista de tarefas</h5>
         <div class="my-2 text-left">
-            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/projetos/form']">
-                Criar Projeto
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/tarefas/form']">
+                Criar Tarefa
             </button>
         </div>
-        <div *ngIf="projetos?.length == 0" class="alert alert-info">
+        <div *ngIf="tarefas?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
-        <table class="table table-bordered table-striped" *ngIf="projetos?.length>0">
+        <table class="table table-bordered table-striped" *ngIf="tarefas?.length>0">
             <thead>
                 <tr>
                     <th>id</th>
                     <th>titulo</th>
-                    <th>fecha</th>
                     <th>editar</th>
                     <th>eliminar</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let projeto of projetos">
-                    <td>{{ projeto.id }}</td>
-                    <td>{{ projeto.titulo }}</td>
-                    <td>{{ projeto.previsaoEntrega |  date: 'dd/MM/yyyy'}}</td>
+                <tr *ngFor="let tarefa of tarefas">
+                    <td>{{ tarefa.id }}</td>
+                    <td>{{ tarefa.titulo }}</td>
                     <td>
-                        <button type="button" name="editar" [routerLink]="['/projetos/form', projeto.id]"
+                        <button type="button" name="editar" [routerLink]="['/tarefas/form', tarefa.id]"
                             class="btn btn-primary btn-sm">Editar</button>
                     </td>
                     <td>
-                        <button type="button" name="eliminar" (click)='delete(projeto)'
+                        <button type="button" name="eliminar" (click)='delete(tarefa)'
                             class="btn btn-danger btn-sm">Excluir</button>
                     </td>
                 </tr>
