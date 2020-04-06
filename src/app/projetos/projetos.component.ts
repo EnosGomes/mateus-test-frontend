@@ -19,7 +19,10 @@ export class ProjetosComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+<<<<<<< HEAD
    
+=======
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       if (!page) {
@@ -32,8 +35,11 @@ export class ProjetosComponent implements OnInit {
         })
       ).subscribe(response => {
         this.projetos = response.content as Projeto[];
+<<<<<<< HEAD
       
         
+=======
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
         this.paginador = response;
       });
     }

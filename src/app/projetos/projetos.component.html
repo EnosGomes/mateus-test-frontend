@@ -10,15 +10,22 @@
         <div *ngIf="projetos?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
+<<<<<<< HEAD
         <div *ngFor="let projeto of projetos " class="alert alert-info">
             {{projeto.titulo}}
         </div>
+=======
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
         <table class="table table-bordered table-striped" *ngIf="projetos?.length>0">
             <thead>
                 <tr>
                     <th>id</th>
                     <th>titulo</th>
+<<<<<<< HEAD
                     <th>Título</th>
+=======
+                    <th>fecha</th>
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
                     <th>editar</th>
                     <th>eliminar</th>
                 </tr>
@@ -27,7 +34,11 @@
                 <tr *ngFor="let projeto of projetos">
                     <td>{{ projeto.id }}</td>
                     <td>{{ projeto.titulo }}</td>
+<<<<<<< HEAD
                     <td>{{ projeto.previsaoEntrega}}</td>
+=======
+                    <td>{{ projeto.previsaoEntrega |  date: 'dd/MM/yyyy'}}</td>
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
                     <td>
                         <button type="button" name="editar" [routerLink]="['/projetos/form', projeto.id]"
                             class="btn btn-primary btn-sm">Editar</button>

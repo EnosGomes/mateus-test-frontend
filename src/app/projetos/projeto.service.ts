@@ -10,7 +10,11 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class ProjetoService {
+<<<<<<< HEAD
   private urlEndPoint: string = 'http://localhost:8181/api/v1/projetos';
+=======
+  private urlEndPoint: string = 'http://localhost:8080/api/v1/projetos';
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
@@ -42,7 +46,11 @@ export class ProjetoService {
   }
 
   create(projeto: Projeto): Observable<any> {
+<<<<<<< HEAD
     console.log(projeto);
+=======
+    console.log("teste do console"+projeto.titulo);
+>>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
     return this.http.post<any>(this.urlEndPoint, projeto, { headers: this.httpHeaders }).pipe(
       catchError(e => {
 
