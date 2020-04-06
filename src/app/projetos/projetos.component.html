@@ -1,0 +1,44 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Projetos</div>
+    <div class="card-body text-primary">
+        <h5 class="card-title">Lista de projetos</h5>
+        <div class="my-2 text-left">
+            <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/projetos/form']">
+                Criar Projeto
+            </button>
+        </div>
+        <div *ngIf="projetos?.length == 0" class="alert alert-info">
+            Não há registros na base de dados.
+        </div>
+        <div *ngFor="let projeto of projetos " class="alert alert-info">
+            {{projeto.titulo}}
+        </div>
+        <table class="table table-bordered table-striped" *ngIf="projetos?.length>0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>titulo</th>
+                    <th>Título</th>
+                    <th>editar</th>
+                    <th>eliminar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let projeto of projetos">
+                    <td>{{ projeto.id }}</td>
+                    <td>{{ projeto.titulo }}</td>
+                    <td>{{ projeto.previsaoEntrega}}</td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/projetos/form', projeto.id]"
+                            class="btn btn-primary btn-sm">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar" (click)='delete(projeto)'
+                            class="btn btn-danger btn-sm">Excluir</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <paginator-nav *ngIf="paginador" [paginador] = 'paginador'></paginator-nav>
+    </div>
+</div>
