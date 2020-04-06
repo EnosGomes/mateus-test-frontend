@@ -68,8 +68,8 @@ export class TarefaService {
     );
   }
 
-  update(projeto: Tarefa): Observable<any> {
-    return this.http.put<any>(`${this.urlEndPoint}/${projeto.id}`, projeto, { headers: this.httpHeaders }).pipe(
+  update(tarefa: Tarefa): Observable<any> {
+    return this.http.put<any>(`${this.urlEndPoint}/${tarefa.id}`, tarefa, { headers: this.httpHeaders }).pipe(
       catchError(e => {
 
         if (e.status == 400) {

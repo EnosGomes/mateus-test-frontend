@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
   selector: 'app-form',
   templateUrl: './form.component.html'
 })
-export class FormComponent implements OnInit {
+export class ProjetoFormComponent implements OnInit {
 
   private projeto: Projeto = new Projeto()
   private titulo: string = "Criar Projeto";
