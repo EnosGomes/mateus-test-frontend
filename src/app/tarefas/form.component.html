@@ -3,14 +3,14 @@
 </ul>
 
 <div class="mt-3 mb-3 card bg-danger text-white">
-  <div class="card-header">Projeto</div>
+  <div class="card-header">Tarefa</div>
   <div class="card-body">
 
-    <form #projetoForm="ngForm">
+    <form #tarefaForm="ngForm">
       <div class="form-group row">
         <label for="titulo" class="col-form-label col-sm-2">Título</label>
         <div class="col-sm-6">
-          <input type="text" class="form-control" [(ngModel)]="projeto.titulo" name="titulo" #titulo="ngModel">
+          <input type="text" class="form-control" [(ngModel)]="tarefa.titulo" name="titulo" #titulo="ngModel">
           <div class="alert alert-danger" *ngIf="titulo.invalid && (titulo.dirty || titulo.touched)">
             <div *ngIf="titulo.errors.required">Título é requerido</div>
             <div *ngIf="titulo.errors.minlength">Título deve ter ao menos 2 caracteres</div>
@@ -18,23 +18,16 @@
         </div>
       </div>
 
-      <div class="form-group row">
-        <label for="previsaoEntrega" class="col-form-label col-sm-2">Entrega Prevista</label>
-        <div class="col-sm-6">
-          <input [matDatepicker]="myDatepicker" class="form-control" [(ngModel)]="projeto.previsaoEntrega" name="previsaoEntrega" style="display:inline; width: 300px;">
-          <mat-datepicker-toggle [for]="myDatepicker"></mat-datepicker-toggle>
-          <mat-datepicker #myDatepicker></mat-datepicker>
-        </div>
-      </div>
+   
 
       <div class="form-group row">
         <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!projeto.id; else elseBlock"
-            [disabled]="!projetoForm.form.valid">Criar</button>
+          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!tarefa.id; else elseBlock"
+            [disabled]="!tarefaForm.form.valid">Criar</button>
 
           <ng-template #elseBlock>
             <button class="btn btn-primary" role="button" (click)='update()'
-              [disabled]="!projetoForm.form.valid">Editar</button>
+              [disabled]="!tarefaForm.form.valid">Editar</button>
           </ng-template>
         </div>
       </div>
