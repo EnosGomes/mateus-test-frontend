@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class ProjetoService {
-  private urlEndPoint: string = 'http://localhost:8080/api/v1/tarefas';
+  private urlEndPoint: string = 'http://localhost:8080/api/v1/projetos';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
