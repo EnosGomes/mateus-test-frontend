@@ -33,10 +33,7 @@ export class ProjetoFormComponent implements OnInit {
   }
 
   create(): void {
-<<<<<<< HEAD
     console.log("create chamado");
-=======
->>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
     this.projetoService.create(this.projeto)
       .subscribe(json => {
         this.router.navigate(['/projetos']);
@@ -57,11 +54,7 @@ export class ProjetoFormComponent implements OnInit {
       .subscribe(json => {
         this.router.navigate(['/projetos']);
         Swal.fire(
-<<<<<<< HEAD
           'Projeto Atualizado',
-=======
-          'Projeto Actualizado',
->>>>>>> 8e0f7d065fcf2e8667906ced749504d11bb9bfd5
           `${json.mensaje}: Projeto ${json.projeto.titulo}`,
           'success'
         )
