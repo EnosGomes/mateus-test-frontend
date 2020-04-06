@@ -12,7 +12,8 @@ import { FooterComponent } from './footer/footer.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { ProjetosComponent } from './projetos/projetos.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
-import { FormComponent } from './projetos/form.component';
+import { ProjetoFormComponent } from './projetos/projetoform.component';
+import { TarefaFormComponent } from './tarefas/tarefaform.component';
 import { ProjetoService } from './projetos/projeto.service';
 import { TarefaService } from './tarefas/tarefa.service';
 
@@ -33,7 +34,8 @@ registerLocaleData(localeEs, 'es');
     DirectivaComponent,
     ProjetosComponent,
     TarefasComponent,
-    FormComponent,
+    ProjetoFormComponent,
+    TarefaFormComponent,
     PaginatorComponent
   ],
   imports: [

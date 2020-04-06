@@ -3,8 +3,8 @@ import { TarefasComponent } from './tarefas/tarefas.component';
 import { DirectivaComponent } from './directiva/directiva.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjetoFormComponent } from './projetos/form.component';
-import { TarefaFormComponent } from './tarefas/form.component';
+import { ProjetoFormComponent } from './projetos/projetoform.component';
+import { TarefaFormComponent } from './tarefas/tarefaform.component';
 
 
 const routes: Routes = [
