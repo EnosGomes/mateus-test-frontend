@@ -17,7 +17,22 @@
           </div>
         </div>
       </div>
+      <div class="form-group row">
+        <label for="titulo" class="col-form-label col-sm-2">Projeto</label>
+        <div class="col-sm-8">    
+            <select name="projetoId" id="projetoId" [(ngModel)]="tarefa.projetoId">
+              <option value=""></option>
+               <option *ngFor="let projeto of projetos" [value]="1"  >         
+                 {{projeto.titulo}}
+               </option>
+             </select>
+          
+        </div>
+      </div>
 
+   <div>
+     
+   </div>
    
 
       <div class="form-group row">

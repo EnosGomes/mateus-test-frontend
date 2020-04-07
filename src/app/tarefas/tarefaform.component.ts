@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Tarefa } from './tarefa'
-import { TarefaService } from './tarefa.service'
-import { Router, ActivatedRoute } from '@angular/router'
+import { Projeto } from '../projetos/projeto';
+import { Observable } from 'rxjs/internal/Observable';
+import { TarefaService } from './tarefa.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { HttpClient, HttpHeaders, HttpResponse  } from '@angular/common/http';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -10,6 +13,7 @@ import Swal from 'sweetalert2'
 })
 export class TarefaFormComponent implements OnInit {
 
+  public projetos: Observable<Projeto>[];
   private tarefa: Tarefa = new Tarefa()
   private titulo: string = "Criar Tarefa";
 
@@ -20,8 +24,14 @@ export class TarefaFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarTarefa()
+    this.cargarTarefa();
+    this.tarefaService.getProjetos()
+      .subscribe(data => this.projetos = data);
+    ;
+
+    console.log(this.projetos);
   }
+
 
   cargarTarefa(): void {
     this.activatedRoute.params.subscribe(params => {

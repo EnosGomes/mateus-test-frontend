@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
 import { Tarefa } from './tarefa';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Projeto } from '../projetos/projeto';
+import { HttpClient, HttpHeaders, HttpResponse  } from '@angular/common/http';
 import { throwError } from 'rxjs';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
@@ -10,7 +11,8 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class TarefaService {
-  private urlEndPoint: string = 'http://localhost:8080/api/v1/tarefas';
+  private urlEndPoint: string = 'http://localhost:8181/api/v1/tarefas';
+  private urlProjetos: string = 'http://localhost:8181/api/v1/projetos/all';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
@@ -20,7 +22,6 @@ export class TarefaService {
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
       tap((response: any) => {
         (response.content as Tarefa[]).forEach(tarefa => {
-          console.log(tarefa.titulo);
         }
         )
       }),
@@ -34,7 +35,6 @@ export class TarefaService {
       }),
       tap(response => {
         (response.content as Tarefa[]).forEach(tarefa => {
-          console.log(tarefa.titulo);
         }
         )
       })
@@ -42,7 +42,7 @@ export class TarefaService {
   }
 
   create(tarefa: Tarefa): Observable<any> {
-    console.log("teste do console"+tarefa.titulo);
+    console.log(tarefa.projetoId);
     return this.http.post<any>(this.urlEndPoint, tarefa, { headers: this.httpHeaders }).pipe(
       catchError(e => {
 
@@ -92,6 +92,10 @@ export class TarefaService {
         return throwError(e);
       })
     );
+  }
+
+  getProjetos(): Observable<any> {
+    return this.http.get(this.urlProjetos);
   }
 
 }

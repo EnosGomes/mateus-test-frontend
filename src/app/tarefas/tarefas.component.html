@@ -13,16 +13,18 @@
         <table class="table table-bordered table-striped" *ngIf="tarefas?.length>0">
             <thead>
                 <tr>
-                    <th>id</th>
-                    <th>titulo</th>
-                    <th>editar</th>
-                    <th>eliminar</th>
+                    <th>Id</th>
+                    <th>Título</th>
+                    <th>Projeto</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let tarefa of tarefas">
                     <td>{{ tarefa.id }}</td>
                     <td>{{ tarefa.titulo }}</td>
+                    <td>{{ tarefa.projetoId }}</td>
                     <td>
                         <button type="button" name="editar" [routerLink]="['/tarefas/form', tarefa.id]"
                             class="btn btn-primary btn-sm">Editar</button>
