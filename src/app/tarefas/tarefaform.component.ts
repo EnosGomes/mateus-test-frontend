@@ -48,7 +48,7 @@ export class TarefaFormComponent implements OnInit {
         this.router.navigate(['/tarefas']);
         Swal.fire(
           'Nova tarefa',
-          `${json.mensaje}: Tarefa ${json.tarefa.titulo}`,
+          `${json.tarefa.titulo}: Tarefa ${json.tarefa.titulo}`,
           'success'
         )
       },
@@ -64,7 +64,7 @@ export class TarefaFormComponent implements OnInit {
         this.router.navigate(['/tarefas']);
         Swal.fire(
           'Tarefa atualizada',
-          `${json.mensaje}: Tarefa ${json.tarefa.titulo}`,
+          `${json.tarefa.titulo}: Tarefa ${json.tarefa.titulo}`,
           'success'
         )
       },

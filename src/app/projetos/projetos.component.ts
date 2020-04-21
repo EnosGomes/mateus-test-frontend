@@ -11,15 +11,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProjetosComponent implements OnInit {
 
+  _listFilter: string;
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    this._listFilter = value;
+    this.filteredProjects = this.listFilter ? this.performFilter(this.listFilter) : this.projetos;
+  }
+  filteredProjects: Projeto[];
   projetos: Projeto[];
   paginador: any;
 
   constructor(
+    
     private projetoService: ProjetoService,
-    private activatedRoute: ActivatedRoute) { }
+    private activatedRoute: ActivatedRoute) { 
+
+      this.filteredProjects = this.projetos;
+      this.listFilter = '';
+    }
 
   ngOnInit() {
-   
+
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       if (!page) {
@@ -32,12 +46,18 @@ export class ProjetosComponent implements OnInit {
         })
       ).subscribe(response => {
         this.projetos = response.content as Projeto[];
-      
-        
+
+
         this.paginador = response;
       });
     }
     );
+  }
+
+  performFilter(filterBy: string): Projeto[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.projetos.filter((projeto: Projeto) =>
+      projeto.titulo.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   delete(projeto: Projeto): void {

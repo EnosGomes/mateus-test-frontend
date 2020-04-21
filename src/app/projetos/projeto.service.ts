@@ -10,7 +10,7 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class ProjetoService {
-  private urlEndPoint: string = 'http://localhost:8181/api/v1/projetos';
+  private urlEndPoint: string = 'https://test-mateus.herokuapp.com/api/v1/projetos';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
@@ -24,14 +24,7 @@ export class ProjetoService {
         }
         )
       }),
-      map((response: any) => { 
-        (response.content as Projeto[]).map(projeto => {
-          projeto.titulo = projeto.titulo.toUpperCase();
-          //projeto.createAt = formatDate(projeto.createAt, 'EEEE dd, MMMM yyyy', 'es');
-          return projeto;
-        });
-        return response;
-      }),
+    
       tap(response => {
         (response.content as Projeto[]).forEach(projeto => {
           console.log(projeto.titulo);

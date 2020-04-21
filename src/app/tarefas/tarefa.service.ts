@@ -25,14 +25,6 @@ export class TarefaService {
         }
         )
       }),
-      map((response: any) => { 
-        (response.content as Tarefa[]).map(tarefa => {
-          tarefa.titulo = tarefa.titulo.toUpperCase();
-          
-          return tarefa;
-        });
-        return response;
-      }),
       tap(response => {
         (response.content as Tarefa[]).forEach(tarefa => {
         }

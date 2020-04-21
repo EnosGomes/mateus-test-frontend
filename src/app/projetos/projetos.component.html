@@ -1,5 +1,6 @@
-<div class="card border-primary mb-3">
-    <div class="card-header">Projetos</div>
+<div class="card border-primary mb-1">
+   
+   
     <div class="card-body text-primary">
         <h5 class="card-title">Lista de projetos</h5>
         <div class="my-2 text-left">
@@ -7,6 +8,19 @@
                 Criar Projeto
             </button>
         </div>
+        <div class='row'>
+            <div class='col-md-2'>Pesquisa por título:</div>
+            <div class='col-md-4'>
+                <input type='text'
+                
+                [(ngModel)]="listFilter"
+                ng-minlength="2"
+                />
+            </div>
+            
+        </div>
+        <br>
+        
         <div *ngIf="projetos?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
@@ -21,7 +35,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let projeto of projetos">
+                <tr *ngFor="let projeto of filteredProjects">
                     <td>{{ projeto.id }}</td>
                     <td>{{ projeto.titulo }}</td>
                     <td>{{ projeto.previsaoEntrega}}</td>
