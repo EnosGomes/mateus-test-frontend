@@ -10,10 +10,9 @@
         <div *ngIf="tarefas?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
-        <table class="table table-bordered table-striped" *ngIf="tarefas?.length>0">
+        <table class="table table-bordered table-striped" *ngIf="tarefas?.length>0" style="text-align: center;">
             <thead>
-                <tr>
-                    <th>Id</th>
+                <tr>                    
                     <th>Título</th>
                     <th>Projeto</th>
                     <th>Editar</th>
@@ -22,9 +21,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let tarefa of tarefas">
-                    <td>{{ tarefa.id }}</td>
                     <td>{{ tarefa.titulo }}</td>
-                    <td>{{ tarefa.projetoId }}</td>
+                    <td>Projeto</td>
                     <td>
                         <button type="button" name="editar" [routerLink]="['/tarefas/form', tarefa.id]"
                             class="btn btn-primary btn-sm">Editar</button>

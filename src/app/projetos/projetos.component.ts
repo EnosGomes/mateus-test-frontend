@@ -24,13 +24,12 @@ export class ProjetosComponent implements OnInit {
   paginador: any;
 
   constructor(
-    
-    private projetoService: ProjetoService,
-    private activatedRoute: ActivatedRoute) { 
 
-      this.filteredProjects = this.projetos;
-      this.listFilter = '';
-    }
+    private projetoService: ProjetoService,
+    private activatedRoute: ActivatedRoute) {
+
+    this.filteredProjects = this.projetos;
+  }
 
   ngOnInit() {
 
@@ -71,7 +70,7 @@ export class ProjetosComponent implements OnInit {
 
     swalWithBootstrapButtons.fire({
       title: 'Tem certeza',
-      text: `Tem certeza que quer eliminar o projeto ${projeto.titulo} }?`,
+      text: `Tem certeza que quer eliminar ${projeto.titulo} }?`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Sim, eliminar!',

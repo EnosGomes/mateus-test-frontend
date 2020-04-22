@@ -1,5 +1,4 @@
-<div class="card border-primary mb-1">
-   
+<div class="card border-primary mb-3">   
    
     <div class="card-body text-primary">
         <h5 class="card-title">Lista de projetos</h5>
@@ -10,11 +9,12 @@
         </div>
         <div class='row'>
             <div class='col-md-2'>Pesquisa por título:</div>
-            <div class='col-md-4'>
+            <div class=' col-md-4'>
                 <input type='text'
-                
+                class="form-control"
+                placeholder="Digite o título que se deseja pesquisar"
+                autocomplete="off" 
                 [(ngModel)]="listFilter"
-                ng-minlength="2"
                 />
             </div>
             
@@ -24,19 +24,17 @@
         <div *ngIf="projetos?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
-        <table class="table table-bordered table-striped" *ngIf="projetos?.length>0">
+        <table class="table table-bordered table-striped" *ngIf="projetos?.length>0" style="text-align: center;">
             <thead>
                 <tr>
-                    <th>Id</th>
                     <th>Título</th>
                     <th>Previsão de Entrega</th>
-                    <th>editar</th>
-                    <th>eliminar</th>
+                    <th>Editar</th>
+                    <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let projeto of filteredProjects">
-                    <td>{{ projeto.id }}</td>
+                <tr *ngFor="let projeto of projetos | filter:listFilter" >
                     <td>{{ projeto.titulo }}</td>
                     <td>{{ projeto.previsaoEntrega}}</td>
                     <td>

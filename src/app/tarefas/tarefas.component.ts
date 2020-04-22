@@ -12,13 +12,14 @@ import { ActivatedRoute } from '@angular/router';
 export class TarefasComponent implements OnInit {
 
  tarefas: Tarefa[];
-  paginador: any;
+ paginador: any;
 
   constructor(
     private tarefaService: TarefaService,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+
     this.activatedRoute.paramMap.subscribe(params => {
       let page: number = +params.get('page');
       if (!page) {
@@ -30,7 +31,9 @@ export class TarefasComponent implements OnInit {
           });
         })
       ).subscribe(response => {
+        
         this.tarefas = response.content as Tarefa[];
+        console.log(this.tarefas);
         this.paginador = response;
       });
     }

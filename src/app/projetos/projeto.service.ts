@@ -10,8 +10,8 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class ProjetoService {
-  private urlEndPoint: string = 'https://test-mateus.herokuapp.com/api/v1/projetos';
-
+  private urlEndPoint: string = 'http://localhost:8181/api/v1/projetos';
+  //private urlEndPointProd: string = 'https://test-mateus.herokuapp.com/api/v1/projetos';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -20,14 +20,14 @@ export class ProjetoService {
     return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
       tap((response: any) => {
         (response.content as Projeto[]).forEach(projeto => {
-          console.log(projeto.titulo);
+          
         }
         )
       }),
     
       tap(response => {
         (response.content as Projeto[]).forEach(projeto => {
-          console.log(projeto.titulo);
+          
         }
         )
       })
@@ -35,16 +35,20 @@ export class ProjetoService {
   }
 
   create(projeto: Projeto): Observable<any> {
-    console.log(projeto);
     return this.http.post<any>(this.urlEndPoint, projeto, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-
         if (e.status == 400) {
+          Swal.fire(
+            'Falha!', 
+            e.error.erros[0], 
+            'error');
           return throwError(e);
+          
         }
 
         console.error(e.error.mensaje);
-        Swal.fire(e.error.mensaje, e.error.error, 'error');
+        Swal.fire(
+          e.error.erros, e.error.erros, 'error');
         return throwError(e);
       })
     );

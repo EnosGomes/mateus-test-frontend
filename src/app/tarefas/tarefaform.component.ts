@@ -4,7 +4,6 @@ import { Projeto } from '../projetos/projeto';
 import { Observable } from 'rxjs/internal/Observable';
 import { TarefaService } from './tarefa.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpHeaders, HttpResponse  } from '@angular/common/http';
 import Swal from 'sweetalert2'
 
 @Component({
@@ -14,7 +13,7 @@ import Swal from 'sweetalert2'
 export class TarefaFormComponent implements OnInit {
 
   public projetos: Observable<Projeto>[];
-  private tarefa: Tarefa = new Tarefa()
+  private tarefa: Tarefa = new Tarefa();
   private titulo: string = "Criar Tarefa";
 
   private errores: string[];
@@ -24,16 +23,14 @@ export class TarefaFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarTarefa();
+    
+    this.carregarTarefa();
     this.tarefaService.getProjetos()
       .subscribe(data => this.projetos = data);
     ;
-
-    console.log(this.projetos);
   }
 
-
-  cargarTarefa(): void {
+  carregarTarefa(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {
@@ -43,17 +40,18 @@ export class TarefaFormComponent implements OnInit {
   }
 
   create(): void {
+    console.log(this.tarefa);
     this.tarefaService.create(this.tarefa)
       .subscribe(json => {
         this.router.navigate(['/tarefas']);
         Swal.fire(
           'Nova tarefa',
-          `${json.tarefa.titulo}: Tarefa ${json.tarefa.titulo}`,
+          `${this.tarefa.titulo}: Tarefa ${this.tarefa.titulo}`,
           'success'
         )
       },
       err => {
-        this.errores = err.error.errors as string[];
+        this.errores = err.error as string[];
       }
       );
   }

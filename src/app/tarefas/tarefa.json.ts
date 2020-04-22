@@ -1,4 +1,4 @@
-import { Tarefa } from "./tarefa";
+/*import { Tarefa } from "./tarefa";
 
 export const TAREFAS: Tarefa[] = [
     {id: 1, titulo: 'Sergio', projetoId: 1
@@ -6,4 +6,4 @@ export const TAREFAS: Tarefa[] = [
    
      
     
-  ];
+  ]; */

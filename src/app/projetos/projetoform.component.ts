@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Projeto } from './projeto'
-import { ProjetoService } from './projeto.service'
-import { Router, ActivatedRoute } from '@angular/router'
-import Swal from 'sweetalert2'
+import { Projeto } from './projeto';
+import { Tarefa } from '../tarefas/tarefa';
+import { TarefaService } from '../tarefas/tarefa.service';
+import { ProjetoService } from './projeto.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-form',
@@ -10,24 +13,40 @@ import Swal from 'sweetalert2'
 })
 export class ProjetoFormComponent implements OnInit {
 
-  private projeto: Projeto = new Projeto()
+  public projetos: Observable<Projeto>[];
+  private projeto: Projeto = new Projeto();
+  private tarefa: Tarefa = new Tarefa();
   private titulo: string = "Criar Projeto";
 
   private errores: string[];
 
   constructor(private projetoService: ProjetoService,
+    private tarefaService: TarefaService,
     private router: Router,
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cargarProjeto()
+    this.carregarProjeto();
+    this.carregarTarefa();
+    this.tarefaService.getProjetos()
+      .subscribe(data => this.projetos = data);
+    ;
   }
 
-  cargarProjeto(): void {
+  carregarProjeto(): void {
     this.activatedRoute.params.subscribe(params => {
       let id = params['id']
       if (id) {
         this.projetoService.getProjeto(id).subscribe((projeto) => this.projeto = projeto)
+      }
+    })
+  }
+
+  carregarTarefa(): void {
+    this.activatedRoute.params.subscribe(params => {
+      let id = params['id']
+      if (id) {
+        this.tarefaService.getTarefa(id).subscribe((tarefa) => this.tarefa = tarefa)
       }
     })
   }

@@ -24,7 +24,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
-registerLocaleData(localeEs, 'es');
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
+registerLocaleData(localeEs, 'pt');
 
 @NgModule({
   declarations: [
@@ -45,12 +47,13 @@ registerLocaleData(localeEs, 'es');
     FormsModule,
     MatDatepickerModule,
     MatMomentDateModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     ProjetoService,
     TarefaService,
-    {provide: LOCALE_ID, useValue: 'es'}
+    {provide: LOCALE_ID, useValue: 'pt'}
   ],
   bootstrap: [AppComponent]
 })

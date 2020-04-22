@@ -34,16 +34,17 @@ export class TarefaService {
   }
 
   create(tarefa: Tarefa): Observable<any> {
-    console.log(tarefa.projetoId);
+   
     return this.http.post<any>(this.urlEndPoint, tarefa, { headers: this.httpHeaders }).pipe(
       catchError(e => {
 
         if (e.status == 400) {
           return throwError(e);
         }
-
-        console.error(e.error.mensaje);
-        Swal.fire(e.error.mensaje, e.error.error, 'error');
+        Swal.fire(
+          e.error.erros[0],
+           e.error.error,
+            'error');
         return throwError(e);
       })
     );
