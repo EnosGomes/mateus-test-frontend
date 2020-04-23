@@ -50,7 +50,7 @@ export class TarefaFormComponent implements OnInit {
         err => {
           Swal.fire(
             'Ops!',
-            'Já existe uma tarefa com esse título nesse projeto.',
+            'Título deve ter no mínimo 2 letras.',
             'error');
           this.errors = err.error as string[];
         }

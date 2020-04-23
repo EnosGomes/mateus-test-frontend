@@ -32,7 +32,9 @@ export class TarefasComponent implements OnInit {
   paginador: any;
 
   constructor(
-    private tarefaService: TarefaService) { 
+    private tarefaService: TarefaService,
+    private activatedRoute: ActivatedRoute) { 
+      this.listFilter = '';
       this.filteredTarefas = this.tarefas;
     }
 
