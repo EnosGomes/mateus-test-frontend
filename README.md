@@ -2,7 +2,7 @@
 Back-end do Teste Mateus App
 
 ## Rotas (Geradas pelo Swagger)
- ![alt text](https://raw.githubusercontent.com/enosgomes/mateus-test-backend/master/src/main/resources/static/telainicial.png)
+  ![alt text](https://raw.githubusercontent.com/enosgomes/mateus-test-frontend/master/src/assets/telainicial.png)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
 
