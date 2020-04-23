@@ -34,13 +34,15 @@ export class TarefasComponent implements OnInit {
   constructor(
     private tarefaService: TarefaService,
     private activatedRoute: ActivatedRoute) { 
-      this.listFilter = '';
-      this.filteredTarefas = this.tarefas;
+     
     }
 
   ngOnInit() {
     this.tarefaService.getTarefas2()
       .subscribe(data => this.tarefas = data);
+
+      this.listFilter = '';
+      this.filteredTarefas = this.tarefas;
   }
 
   performFilter(filterBy: string): Tarefa[] {
