@@ -21,6 +21,7 @@ export class ProjetosComponent implements OnInit {
   }
   filteredProjects: Projeto[];
   projetos: Projeto[];
+  projetos2: Projeto[];
   paginador: any;
 
   constructor(
@@ -33,29 +34,13 @@ export class ProjetosComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      let page: number = +params.get('page');
-      if (!page) {
-        page = 0;
-      }
-      this.projetoService.getProjetos(page).pipe(
-        tap(response => {
-          (response.content as Projeto[]).forEach(projeto => {
-          });
-        })
-      ).subscribe(response => {
-        this.projetos = response.content as Projeto[];
-
-
-        this.paginador = response;
-      });
-    }
-    );
+    this.projetoService.getProjetos2()
+    .subscribe(data => this.projetos2 = data);    
   }
 
   performFilter(filterBy: string): Projeto[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.projetos.filter((projeto: Projeto) =>
+    return this.projetos2.filter((projeto: Projeto) =>
       projeto.titulo.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
@@ -70,20 +55,21 @@ export class ProjetosComponent implements OnInit {
 
     swalWithBootstrapButtons.fire({
       title: 'Tem certeza',
-      text: `Tem certeza que quer eliminar ${projeto.titulo} }?`,
+      text: `Tem certeza que deseja excluir o projeto ${projeto.titulo}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim, eliminar!',
-      cancelButtonText: 'Não, cancelar',
+      cancelButtonText: 'Não, cancelar.',
+      confirmButtonText: 'Sim, excluir!',      
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
         this.projetoService.delete(projeto.id).subscribe(
           response => {
-            this.projetos = this.projetos.filter(cli => cli !== projeto)
+            this.projetoService.getProjetos2()
+                      .subscribe(data => this.projetos2 = data) ;
             swalWithBootstrapButtons.fire(
-              'Deletado',
-              `Projeto ${projeto.titulo} eliminado com sucesso`,
+              'Excluído',
+              `Projeto ${projeto.titulo} excluído com sucesso`,
               'success'
             )
           }

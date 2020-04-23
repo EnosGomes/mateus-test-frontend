@@ -24,10 +24,10 @@ export class TarefaFormComponent implements OnInit {
 
   ngOnInit() {
     
-    this.carregarTarefa();
+    this.carregarTarefa();    
+
     this.tarefaService.getProjetos()
-      .subscribe(data => this.projetos = data);
-    ;
+      .subscribe(data => this.projetos = data);    
   }
 
   carregarTarefa(): void {
@@ -46,11 +46,15 @@ export class TarefaFormComponent implements OnInit {
         this.router.navigate(['/tarefas']);
         Swal.fire(
           'Nova tarefa',
-          `${this.tarefa.titulo}: Tarefa ${this.tarefa.titulo}`,
+          ` Tarefa ${this.tarefa.titulo}`,
           'success'
         )
       },
       err => {
+        Swal.fire(
+          'Ops!',
+           'Já existe uma tarefa com esse título nesse projeto.',
+            'error');
         this.errores = err.error as string[];
       }
       );

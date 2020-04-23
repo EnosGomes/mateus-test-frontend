@@ -13,6 +13,8 @@ import Swal from 'sweetalert2';
 })
 export class ProjetoFormComponent implements OnInit {
 
+   minDate = new Date();
+
   public projetos: Observable<Projeto>[];
   private projeto: Projeto = new Projeto();
   private tarefa: Tarefa = new Tarefa();
@@ -26,6 +28,7 @@ export class ProjetoFormComponent implements OnInit {
     private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    
     this.carregarProjeto();
     this.carregarTarefa();
     this.tarefaService.getProjetos()

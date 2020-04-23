@@ -37,8 +37,12 @@ export class TarefaService {
    
     return this.http.post<any>(this.urlEndPoint, tarefa, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-
-        if (e.status == 400) {
+        console.log(e);
+        if (e.status == 500) {
+          Swal.fire(
+            e.error.erros[0],
+             e.error.error,
+              'error');
           return throwError(e);
         }
         Swal.fire(
@@ -50,6 +54,20 @@ export class TarefaService {
     );
   }
 
+  getTarefa2(): Observable<Tarefa[]> {
+    return this.http.get<Tarefa[]>(`${this.urlEndPoint}`).pipe(
+      catchError(e => {
+        this.router.navigate(['/tarefas']);
+        console.error(e.error.mensaje);
+        Swal.fire('Erro em editar',
+         e.error.mensaje, 
+         'error');
+        return throwError(e);
+      })
+    );
+  }
+
+  
   getTarefa(id): Observable<Tarefa> {
     return this.http.get<Tarefa>(`${this.urlEndPoint}/${id}`).pipe(
       catchError(e => {
@@ -68,8 +86,6 @@ export class TarefaService {
         if (e.status == 400) {
           return throwError(e);
         }
-
-        console.error(e.error.mensaje);
         this.router.navigate(['/tarefas']);
         Swal.fire(e.error.mensaje, e.error.error, 'success');
         return throwError(e);
@@ -80,12 +96,16 @@ export class TarefaService {
   delete(id: number): Observable<Tarefa> {
     return this.http.delete<Tarefa>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-        console.error(e.error.mensaje);
         Swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
       })
     );
   }
+
+  getTarefas2(): Observable<any> {
+    return this.http.get(this.urlEndPoint);
+  }
+
 
   getProjetos(): Observable<any> {
     return this.http.get(this.urlProjetos);

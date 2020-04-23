@@ -1,28 +1,29 @@
 <div class="card border-primary mb-3">
-    <div class="card-header">Tarefas</div>
+    
     <div class="card-body text-primary">
-        <h5 class="card-title">Lista de tarefas</h5>
         <div class="my-2 text-left">
             <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/tarefas/form']">
                 Criar Tarefa
             </button>
         </div>
-        <div *ngIf="tarefas?.length == 0" class="alert alert-info">
+        <h5 class="card-title">Lista de tarefas</h5>
+     
+        <div *ngIf="tarefas2?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
-        <table class="table table-bordered table-striped" *ngIf="tarefas?.length>0" style="text-align: center;">
+        <table class="table table-bordered table-striped" *ngIf="tarefas2?.length>0" style="text-align: center;">
             <thead>
                 <tr>                    
-                    <th>Título</th>
-                    <th>Projeto</th>
+                    <th>Título da Tarefa</th>
+                    <th>Título do Projeto</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let tarefa of tarefas">
+                <tr *ngFor="let tarefa of tarefas2">
                     <td>{{ tarefa.titulo }}</td>
-                    <td>Projeto</td>
+                    <td>{{ tarefa.projeto.titulo}}</td>
                     <td>
                         <button type="button" name="editar" [routerLink]="['/tarefas/form', tarefa.id]"
                             class="btn btn-primary btn-sm">Editar</button>

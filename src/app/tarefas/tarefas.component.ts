@@ -11,8 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TarefasComponent implements OnInit {
 
- tarefas: Tarefa[];
- paginador: any;
+  tarefas2: Tarefa[];
+  paginador: any;
 
   constructor(
     private tarefaService: TarefaService,
@@ -20,24 +20,8 @@ export class TarefasComponent implements OnInit {
 
   ngOnInit() {
 
-    this.activatedRoute.paramMap.subscribe(params => {
-      let page: number = +params.get('page');
-      if (!page) {
-        page = 0;
-      }
-      this.tarefaService.getTarefas(page).pipe(
-        tap(response => {
-          (response.content as Tarefa[]).forEach(tarefa => {
-          });
-        })
-      ).subscribe(response => {
-        
-        this.tarefas = response.content as Tarefa[];
-        console.log(this.tarefas);
-        this.paginador = response;
-      });
-    }
-    );
+    this.tarefaService.getTarefas2()
+      .subscribe(data => this.tarefas2 = data);
   }
 
   delete(tarefa: Tarefa): void {
@@ -50,21 +34,22 @@ export class TarefasComponent implements OnInit {
     })
 
     swalWithBootstrapButtons.fire({
-      title: 'Tem certeza?',
-      text: `Tem certeza que quer eliminar essa tarefa ${tarefa.titulo} }?`,
+      title: 'Tem certeza',
+      text: `Tem certeza que deseja excluir a tarefa ${tarefa.titulo}?`,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Sim, eliminar!',
-      cancelButtonText: 'Não, cancelar',
+      cancelButtonText: 'Não, cancelar.',
+      confirmButtonText: 'Sim, excluir!',      
       reverseButtons: true
     }).then((result) => {
       if (result.value) {
         this.tarefaService.delete(tarefa.id).subscribe(
           response => {
-            this.tarefas = this.tarefas.filter(cli => cli !== tarefa)
+            this.tarefaService.getTarefa2()
+                      .subscribe(data => this.tarefas2 = data) ;
             swalWithBootstrapButtons.fire(
-              'Eliminado',
-              `Tarefa ${tarefa.titulo} eliminada sucesso`,
+              'Excluído',
+              `Tarefa ${tarefa.titulo} excluído com sucesso`,
               'success'
             )
           }

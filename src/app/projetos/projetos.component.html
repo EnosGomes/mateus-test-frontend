@@ -21,20 +21,20 @@
         </div>
         <br>
         
-        <div *ngIf="projetos?.length == 0" class="alert alert-info">
+        <div *ngIf="projetos2?.length == 0" class="alert alert-info">
             Não há registros na base de dados.
         </div>
-        <table class="table table-bordered table-striped" *ngIf="projetos?.length>0" style="text-align: center;">
+        <table class="table table-bordered table-striped" *ngIf="projetos2?.length>0" style="text-align: center;">
             <thead>
                 <tr>
-                    <th>Título</th>
+                    <th>Título do Projeto</th>
                     <th>Previsão de Entrega</th>
                     <th>Editar</th>
                     <th>Excluir</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let projeto of projetos | filter:listFilter" >
+                <tr *ngFor="let projeto of projetos2 | filter:listFilter" >
                     <td>{{ projeto.titulo }}</td>
                     <td>{{ projeto.previsaoEntrega}}</td>
                     <td>
