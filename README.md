@@ -1,7 +1,6 @@
 # mateus-app
 Back-end do Teste Mateus App
 
-## Rotas (Geradas pelo Swagger)
   ![alt text](https://raw.githubusercontent.com/enosgomes/mateus-test-frontend/master/src/assets/telainicial.png)
 
 ## Executar projeto
