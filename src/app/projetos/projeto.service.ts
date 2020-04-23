@@ -10,30 +10,11 @@ import Swal from 'sweetalert2'
 
 @Injectable()
 export class ProjetoService {
-  private urlEndPoint1: string = 'http://localhost:8181/api/v1/projetos/all';
   private urlEndPoint: string = 'http://localhost:8181/api/v1/projetos';
   //private urlEndPointProd: string = 'https://test-mateus.herokuapp.com/api/v1/projetos';
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
   constructor(private http: HttpClient, private router: Router) { }
-
-  getProjetos(page: number): Observable<any> {
-    return this.http.get(this.urlEndPoint + '/page/' + page).pipe(
-      tap((response: any) => {
-        (response.content as Projeto[]).forEach(projeto => {
-
-        }
-        )
-      }),
-
-      tap(response => {
-        (response.content as Projeto[]).forEach(projeto => {
-
-        }
-        )
-      })
-    );
-  }
 
   create(projeto: Projeto): Observable<any> {
     return this.http.post<any>(this.urlEndPoint, projeto, { headers: this.httpHeaders }).pipe(
@@ -77,8 +58,6 @@ export class ProjetoService {
   delete(id: number): Observable<Projeto> {
     return this.http.delete<Projeto>(`${this.urlEndPoint}/${id}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-
-        console.log(e);
         Swal.fire('Erro ao excluir o projeto!',
            e.error.message, 
            'error');
@@ -87,8 +66,8 @@ export class ProjetoService {
     );
   }
 
-  getProjetos2(): Observable<Projeto[]> {
-    return this.http.get<Projeto[]>(`${this.urlEndPoint1}`).pipe(
+  getProjetos(): Observable<Projeto[]> {
+    return this.http.get<Projeto[]>(`${this.urlEndPoint}`).pipe(
       catchError(e => {
         this.router.navigate(['/projetos']);
         Swal.fire('Erro em editar', e.error.mensaje, 'error');

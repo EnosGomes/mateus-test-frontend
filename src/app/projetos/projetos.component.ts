@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Projeto } from './projeto';
 import { ProjetoService } from './projeto.service';
-import Swal from 'sweetalert2'
-import { tap } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-projetos',
-  templateUrl: './projetos.component.html'
+  templateUrl: './projetos.component.html',
+  styleUrls: ['./projetos.component.css']
 })
 export class ProjetosComponent implements OnInit {
 
@@ -16,31 +15,32 @@ export class ProjetosComponent implements OnInit {
     return this._listFilter;
   }
   set listFilter(value: string) {
-    this._listFilter = value;
-    this.filteredProjects = this.listFilter ? this.performFilter(this.listFilter) : this.projetos;
+    
+    if(value.length > 2) {
+      this._listFilter = value;
+       this.filteredProjects = this.performFilter(this.listFilter);
+    } else {
+      this._listFilter = '';
+      this.filteredProjects = this.projetos;
+    }   
   }
+
   filteredProjects: Projeto[];
   projetos: Projeto[];
-  projetos2: Projeto[];
-  paginador: any;
 
   constructor(
-
-    private projetoService: ProjetoService,
-    private activatedRoute: ActivatedRoute) {
-
+    private projetoService: ProjetoService) {
     this.filteredProjects = this.projetos;
   }
 
   ngOnInit() {
-
-    this.projetoService.getProjetos2()
-    .subscribe(data => this.projetos2 = data);    
+    this.projetoService.getProjetos()
+    .subscribe(data => this.projetos = data);    
   }
 
   performFilter(filterBy: string): Projeto[] {
     filterBy = filterBy.toLocaleLowerCase();
-    return this.projetos2.filter((projeto: Projeto) =>
+    return this.projetos.filter((projeto: Projeto) =>
       projeto.titulo.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
@@ -65,8 +65,8 @@ export class ProjetosComponent implements OnInit {
       if (result.value) {
         this.projetoService.delete(projeto.id).subscribe(
           response => {
-            this.projetoService.getProjetos2()
-                      .subscribe(data => this.projetos2 = data) ;
+            this.projetoService.getProjetos()
+                      .subscribe(data => this.projetos = data) ;
             swalWithBootstrapButtons.fire(
               'Excluído',
               `Projeto ${projeto.titulo} excluído com sucesso`,

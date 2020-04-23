@@ -11,17 +11,41 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TarefasComponent implements OnInit {
 
-  tarefas2: Tarefa[];
+  _listFilter: string;
+  get listFilter(): string {
+    return this._listFilter;
+  }
+  set listFilter(value: string) {
+    
+    if(value.length > 2) {
+      this._listFilter = value;
+       this.filteredTarefas = this.performFilter(this.listFilter);
+    } else {
+      this._listFilter = '';
+      this.filteredTarefas = this.tarefas;
+    }   
+  }
+
+  filteredTarefas: Tarefa[];
+
+  tarefas: Tarefa[];
   paginador: any;
 
   constructor(
-    private tarefaService: TarefaService,
-    private activatedRoute: ActivatedRoute) { }
+    private tarefaService: TarefaService) { 
+      this.filteredTarefas = this.tarefas;
+    }
 
   ngOnInit() {
-
     this.tarefaService.getTarefas2()
-      .subscribe(data => this.tarefas2 = data);
+      .subscribe(data => this.tarefas = data);
+  }
+
+  performFilter(filterBy: string): Tarefa[] {
+    filterBy = filterBy.toLocaleLowerCase();
+
+    return this.tarefas.filter(
+      (projeto: Tarefa) => projeto.titulo.toLocaleLowerCase().indexOf(filterBy) !== -1);
   }
 
   delete(tarefa: Tarefa): void {
@@ -46,7 +70,7 @@ export class TarefasComponent implements OnInit {
         this.tarefaService.delete(tarefa.id).subscribe(
           response => {
             this.tarefaService.getTarefa2()
-                      .subscribe(data => this.tarefas2 = data) ;
+                      .subscribe(data => this.tarefas = data) ;
             swalWithBootstrapButtons.fire(
               'Excluído',
               `Tarefa ${tarefa.titulo} excluído com sucesso`,

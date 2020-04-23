@@ -32,14 +32,17 @@
    
 
       <div class="form-group row">
-        <div class="col-sm-6">
-          <button class="btn btn-primary" role="button" (click)='create()' *ngIf="!tarefa.id; else elseBlock"
-            [disabled]="!tarefaForm.form.valid">Criar</button>
+        <div class="col-sm-1">
+          <button class="btn btn-success" role="button" (click)='create()' *ngIf="!tarefa.id; else elseBlock"
+            [disabled]="!tarefaForm.form.valid">Salvar</button>
 
           <ng-template #elseBlock>
             <button class="btn btn-primary" role="button" (click)='update()'
               [disabled]="!tarefaForm.form.valid">Editar</button>
           </ng-template>
+        </div>
+        <div class="col-sm-1">
+          <button class="btn"  type="button" [routerLink]="['/tarefas']">Sair</button>
         </div>
       </div>
     </form>

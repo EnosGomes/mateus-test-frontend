@@ -9,7 +9,6 @@ import { AppComponent } from './app.component';
 
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-import { DirectivaComponent } from './directiva/directiva.component';
 import { ProjetosComponent } from './projetos/projetos.component';
 import { TarefasComponent } from './tarefas/tarefas.component';
 import { ProjetoFormComponent } from './projetos/projetoform.component';
@@ -17,7 +16,6 @@ import { TarefaFormComponent } from './tarefas/tarefaform.component';
 import { ProjetoService } from './projetos/projeto.service';
 import { TarefaService } from './tarefas/tarefa.service';
 
-import localeEs from '@angular/common/locales/es';
 import { PaginatorComponent } from './paginator/paginator.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -26,14 +24,13 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
-registerLocaleData(localeEs, 'pt');
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    DirectivaComponent,
     ProjetosComponent,
     TarefasComponent,
     ProjetoFormComponent,
@@ -52,8 +49,7 @@ registerLocaleData(localeEs, 'pt');
   ],
   providers: [
     ProjetoService,
-    TarefaService,
-    {provide: LOCALE_ID, useValue: 'pt'}
+    TarefaService
   ],
   bootstrap: [AppComponent]
 })

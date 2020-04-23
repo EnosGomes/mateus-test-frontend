@@ -12,7 +12,7 @@ import Swal from 'sweetalert2'
 @Injectable()
 export class TarefaService {
   private urlEndPoint: string = 'http://localhost:8181/api/v1/tarefas';
-  private urlProjetos: string = 'http://localhost:8181/api/v1/projetos/all';
+  private urlProjetos: string = 'http://localhost:8181/api/v1/projetos';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
@@ -37,7 +37,6 @@ export class TarefaService {
    
     return this.http.post<any>(this.urlEndPoint, tarefa, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-        console.log(e);
         if (e.status == 500) {
           Swal.fire(
             e.error.erros[0],
