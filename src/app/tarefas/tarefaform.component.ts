@@ -50,7 +50,7 @@ export class TarefaFormComponent implements OnInit {
         err => {
           Swal.fire(
             'Ops!',
-            'Título deve ter no mínimo 2 letras.',
+            'Título deve ter no mínimo 3 letras.',
             'error');
           this.errors = err.error as string[];
         }

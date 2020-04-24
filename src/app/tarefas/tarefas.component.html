@@ -34,7 +34,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let tarefa of filteredTarefas">
+                <tr *ngFor="let tarefa of filteredTarefas | filter:listFilter">
                     <td>{{ tarefa.titulo }}</td>
                     <td>{{ tarefa.projeto.titulo}}</td>
                     <td>

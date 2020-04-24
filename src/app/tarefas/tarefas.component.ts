@@ -16,13 +16,18 @@ export class TarefasComponent implements OnInit {
     return this._listFilter;
   }
   set listFilter(value: string) {
-    
+
+    this.filteredTarefas = this.tarefas;
+
     if(value.length > 2) {
       this._listFilter = value;
        this.filteredTarefas = this.performFilter(this.listFilter);
     } else {
-      this._listFilter = '';
+      console.log("value = " + value);
+      console.log(this.listFilter);
+      
       this.filteredTarefas = this.tarefas;
+      this._listFilter = '';
     }   
   }
 
@@ -37,12 +42,11 @@ export class TarefasComponent implements OnInit {
      
     }
 
+    
+
   ngOnInit() {
     this.tarefaService.getTarefas2()
       .subscribe(data => this.tarefas = data);
-
-      this.listFilter = '';
-      this.filteredTarefas = this.tarefas;
   }
 
   performFilter(filterBy: string): Tarefa[] {
