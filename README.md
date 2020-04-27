@@ -8,6 +8,7 @@ Para executar o projeto você vai precisar:
 - Node ( https://nodejs.org/en/download/ ) 
 - NPM ( Automaticamente instalado com o Node )
 - Angular ( npm install -g @angular/cli )
+- Ng2 Search Filter
 
 Após instalados o node, npm e angular digite no terminal:
 
