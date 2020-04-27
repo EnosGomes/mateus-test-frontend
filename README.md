@@ -13,8 +13,8 @@ Após instalados o node, npm e angular digite no terminal:
 
 ````
 npm install
+npm i ng2-search-filter --save
 ````
-
 Após baixar as bibliotecas suba a aplicação digitando no terminal:
 
 ````
